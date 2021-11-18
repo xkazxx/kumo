@@ -7,6 +7,7 @@ import com.kennycason.kumo.font.scale.SqrtFontScalar;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.nlp.tokenizers.ChineseWordTokenizer;
 import com.kennycason.kumo.palette.ColorPalette;
+import com.kennycason.kumo.util.ColorUtil;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,22 +75,26 @@ public class WorldCloudChineseTest {
         wordCloud.writeToFile("output_test/chinese_language_circle_gb2312.png");
     }
 
-    public void chineseCircle(final List<WordFrequency> wordFrequencies) {
+    @Test
+    public void chineseCircleFont() throws IOException {
         final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
         frequencyAnalyzer.setWordFrequenciesToReturn(WORD_LIMIT);
         frequencyAnalyzer.setMinWordLength(2);
         frequencyAnalyzer.setWordTokenizer(new ChineseWordTokenizer());
+
+        final List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(getInputStream("text/chinese_dragon.txt"));
         final Dimension dimension = new Dimension(RADIUS * 2, RADIUS * 2);
         final WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
         wordCloud.setPadding(2);
-        wordCloud.setKumoFont(new KumoFont(CHINESE_DEFAULT_FONT, FontWeight.PLAIN)); // Solve Chinese picture garbled code
+        wordCloud.setKumoFont(new KumoFont(CHINESE_DEFAULT_FONT, FontWeight.PLAIN)); // 解决中文乱码
         wordCloud.setBackground(new CircleBackground(RADIUS));
-        wordCloud.setColorPalette(new ColorPalette(new Color(0xD5CFFA), new Color(0xBBB1FA), new Color(0x9A8CF5), new Color(0x806EF5)));
+        wordCloud.setBackgroundColor(Color.white); // 设置背景颜色
+        wordCloud.setColorPalette(new ColorPalette(ColorUtil.getRandomColor(100)));
         wordCloud.setFontScalar(new SqrtFontScalar(12, 45));
         final long startTime = System.currentTimeMillis();
         wordCloud.build(wordFrequencies);
         LOGGER.info("Took " + (System.currentTimeMillis() - startTime) + "ms to build");
-        wordCloud.writeToFile("output_test/chinese_language_circle_gb2312.png");
+        wordCloud.writeToFile("output_test/chinese_language_circle_font.png");
     }
 
 
