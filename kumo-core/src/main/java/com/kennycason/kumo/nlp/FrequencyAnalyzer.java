@@ -68,6 +68,10 @@ public class FrequencyAnalyzer {
         return load(IOUtils.readLines(inputStream, characterEncoding));
     }
 
+    public List<WordFrequency> load(final InputStream inputStream,String characterEncoding) throws IOException {
+        return load(IOUtils.readLines(inputStream, characterEncoding));
+    }
+
     public List<WordFrequency> load(final File file) throws IOException {
         return this.load(new FileInputStream(file));
     }
