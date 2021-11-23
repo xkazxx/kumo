@@ -2,21 +2,26 @@ package com.kennycason.kumo;
 
 import com.kennycason.kumo.font.KumoFont;
 
+import java.io.Serializable;
+
 /**
  * Created by kenny on 6/29/14.
  */
-public class WordFrequency implements Comparable<WordFrequency> {
+public class WordFrequency implements Comparable<WordFrequency> , Serializable {
 
-    private final String word;
+    private String word;
 
-    private final int frequency;
+    private int frequency;
 
-    private final KumoFont font;
+    private KumoFont font;
 
     public WordFrequency(final String word, final int frequency) {
         this.word = word;
         this.frequency = frequency;
         this.font = null;
+    }
+
+    public WordFrequency() {
     }
 
     public WordFrequency(final String word, final int frequency, final KumoFont font) {

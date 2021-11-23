@@ -15,6 +15,7 @@
         <module>kumo-core</module>
         <module>kumo-cli</module>
         <module>kumo-tokenizers</module>
+        <module>service-provider</module>
     </modules>
 
     <properties>

@@ -200,7 +200,6 @@ public class WordCloud {
                     graphics.drawImage(word.getBufferedImage(), position.x, position.y, null);
                     return true;
                 }
-                
                 // try negative root (if offset != 0)
                 position.y = start.y - offset;
                 if (offset != 0 && position.y >= 0 && position.y < dimension.height && canPlace(word)) {
@@ -259,7 +258,8 @@ public class WordCloud {
         final Font font = (wordFrequency.hasFont() ? wordFrequency.getFont() : kumoFont).getFont().deriveFont(fontHeight);
         final FontMetrics fontMetrics = graphics.getFontMetrics(font);
         
-        final double theta = angleGenerator.randomNext();
+//        final double theta = angleGenerator.randomNext();
+        final double theta = 0D;
         final Word word = new Word(
                 wordFrequency.getWord(), colorPalette.next(), 
                 fontMetrics, this.collisionChecker, theta
